@@ -1,97 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Custom Cursor Logic
-    const cursor = document.querySelector('.custom-cursor');
-    const follower = document.querySelector('.cursor-follower');
-    
-    document.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        
-        // Main dot
-        cursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
-        
-        // Smooth follower
-        follower.style.transform = `translate(${clientX - 11}px, ${clientY - 11}px)`;
-    });
-
-    // Cursor Reactivity
-    const interactiveElements = document.querySelectorAll('a, button, .glass, .project-card');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            follower.style.transform += ' scale(1.5)';
-            follower.style.background = 'rgba(100, 255, 218, 0.1)';
-            follower.style.borderColor = 'transparent';
-        });
-        el.addEventListener('mouseleave', () => {
-            follower.style.transform = follower.style.transform.replace(' scale(1.5)', '');
-            follower.style.background = 'transparent';
-            follower.style.borderColor = 'var(--accent-primary)';
-        });
-    });
-
-    // 2. Intersection Observer for Scroll-Reveal
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
+    // 1. Intersection Observer for Reveal Animations
+    const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
+                entry.target.classList.add('active');
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
 
-    const fadeElements = document.querySelectorAll('.fade-up');
-    fadeElements.forEach(el => revealObserver.observe(el));
+    revealElements.forEach(el => revealObserver.observe(el));
 
-    // 3. Smooth Scroll for Navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+    // 2. Magnetic Button Effect
+    const magneticButtons = document.querySelectorAll('.magnetic');
+    
+    magneticButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const position = btn.getBoundingClientRect();
+            const x = e.pageX - position.left - position.width / 2;
+            const y = e.pageY - position.top - position.height / 2;
             
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const navHeight = document.querySelector('.glass-nav').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0px, 0px)';
+        });
+    });
+
+    // 3. Custom Cursor Follower (Performance Optimized)
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    const follower = document.createElement('div');
+    follower.className = 'cursor-follower';
+    document.body.appendChild(follower);
+
+    // Apply basic styles for cursor (minimalist)
+    Object.assign(cursor.style, {
+        position: 'fixed',
+        width: '8px',
+        height: '8px',
+        background: 'var(--accent-primary)',
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: '10000',
+        transition: 'transform 0.1s ease'
+    });
+
+    Object.assign(follower.style, {
+        position: 'fixed',
+        width: '32px',
+        height: '32px',
+        border: '1px solid var(--accent-primary)',
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: '9999',
+        transition: 'transform 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
+        opacity: '0.5'
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        follower.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    });
+
+    // 4. Parallax Mesh Effect
+    const mesh = document.querySelector('.mesh-gradient');
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        mesh.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+    });
+
+    // 5. Smooth Section Navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = 80; // Nav height
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = target.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
                 window.scrollTo({
-                    top: targetPosition,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
             }
         });
     });
 
-    // 4. Navbar Background Change on Scroll
+    // 6. Navigation Scroll Effect
     const nav = document.querySelector('.glass-nav');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.style.padding = '12px 0';
-            nav.style.background = 'rgba(11, 16, 27, 0.95)';
+        if (window.scrollY > 100) {
+            nav.style.padding = '16px 0';
+            nav.style.background = 'rgba(8, 10, 15, 0.95)';
         } else {
-            nav.style.padding = '20px 0';
-            nav.style.background = 'rgba(11, 16, 27, 0.8)';
+            nav.style.padding = '24px 0';
+            nav.style.background = 'transparent';
         }
-    });
-
-    // 5. Parallax Effect for Background Blobs
-    const blobs = document.querySelectorAll('.blob');
-    window.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 0.015;
-            const x = (clientX - centerX) * speed;
-            const y = (clientY - centerY) * speed;
-            blob.style.left = `calc(${blob.offsetLeft}px + ${x}px)`; // This is a bit jittery, let's use transform
-            // Overriding transform to include move-blob animation and mouse parallax
-            // Actually, for simplicity and performance, let's just stick to the CSS animation + subtle JS offset
-            blob.style.transform = `translate(${x}px, ${y}px)`;
-        });
     });
 });
