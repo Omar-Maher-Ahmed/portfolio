@@ -1,134 +1,383 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omar Maher | Backend Architect</title>
+    <title>Omar Maher | Backend Engineer</title>
+    <meta name="description" content="Backend-focused CS student skilled in Node.js, NestJS, and MongoDB. Building scalable REST APIs and production-ready systems.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="mesh-bg"></div>
-    <div class="custom-cursor"></div>
-    <div class="cursor-follower"></div>
 
-    <nav class="nav">
-        <div class="container nav-container">
-            <a href="#" style="text-decoration: none; color: white; font-weight: 800; font-size: 20px;">OMAR<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#projects">Work</a></li>
-                <li><a href="#about">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <!-- Animated Background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="logo" id="logo">
+                <span class="logo-bracket">&lt;</span>Omar<span class="logo-dot">/</span><span class="logo-bracket">&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
             </ul>
+            <a href="mailto:omar.shabour1@gmail.com" class="nav-cta" id="navCta">Hire Me</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon theme-icon-dark">🌙</span>
+                <span class="theme-icon theme-icon-light">☀️</span>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#hero" class="mobile-link">Home</a></li>
+            <li><a href="#about" class="mobile-link">About</a></li>
+            <li><a href="#skills" class="mobile-link">Skills</a></li>
+            <li><a href="#projects" class="mobile-link">Projects</a></li>
+            <li><a href="#contact" class="mobile-link">Contact</a></li>
+        </ul>
+        <div class="mobile-actions">
+            <a href="cv.pdf" download class="btn btn-primary" id="mobileDownloadCv">⬇ Download CV</a>
+            <button class="mobile-theme-toggle" id="mobileThemeToggle">Switch to Light Mode</button>
+        </div>
+    </div>
+
     <main>
+        <!-- ─── HERO ─── -->
         <section id="hero" class="hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="reveal">
-                        <span style="color: var(--accent-cyan); font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Backend Specialist</span>
-                        <h1 style="margin-top: 10px;">Engineering <span class="gradient-text">Robust Systems</span></h1>
-                        <p>I build scalable, secure backend architectures with NestJS and Node.js. Focused on clean code and production-ready APIs.</p>
-                        <a href="#contact" class="submit-btn" style="text-decoration: none; display: inline-block;">Let's Talk</a>
+                <div class="hero-layout">
+                    <!-- Left: Text -->
+                    <div class="hero-text">
+                        <div class="hero-tag fade-up">
+                            <span class="tag-dot"></span>
+                            Available for Backend Roles
+                        </div>
+                        <h1 class="hero-title fade-up" style="--delay:0.1s">
+                            Backend-focused<br>
+                            <span class="gradient-text">Computer Science</span><br>
+                            Student
+                        </h1>
+                        <p class="hero-desc fade-up" style="--delay:0.2s">
+                            Skilled in <strong>Node.js</strong>, <strong>NestJS</strong>, and <strong>MongoDB</strong>.<br>
+                            Experienced in building scalable REST APIs with clean architecture and secure authentication.<br>
+                            Developing production-ready systems including E-Commerce and real-time applications.
+                        </p>
+                        <div class="hero-actions fade-up" style="--delay:0.3s">
+                            <a href="#projects" class="btn btn-primary" id="heroPrimaryBtn">View My Work</a>
+                            <a href="#contact" class="btn btn-ghost" id="heroGhostBtn">Let's Talk</a>
+                            <a href="cv.pdf" download class="btn btn-download" id="downloadCvBtn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                Download CV
+                            </a>
+                        </div>
+                        <div class="hero-stats fade-up" style="--delay:0.4s">
+                            <div class="stat">
+                                <span class="stat-num">3+</span>
+                                <span class="stat-label">Production Projects</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat">
+                                <span class="stat-num">REST</span>
+                                <span class="stat-label">API Specialist</span>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat">
+                                <span class="stat-num">Clean</span>
+                                <span class="stat-label">Architecture</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="reveal" style="transition-delay: 0.2s;">
-                        <div class="glass-card qr-card">
-                            <img src="qrcode.png" alt="Omar Maher QR Code">
-                            <p style="font-size: 14px; color: var(--text-secondary);">Scan to View Resume</p>
+                    <!-- Right: Avatar -->
+                    <div class="hero-avatar-wrap fade-up" style="--delay:0.15s">
+                        <div class="avatar-ring">
+                            <div class="avatar-img-wrap">
+                                <img src="avatar.jpg" alt="Omar Maher" class="avatar-img" id="avatarImg"
+                                     onerror="this.style.display='none';document.getElementById('avatarFallback').style.display='flex'">
+                                <div class="avatar-fallback" id="avatarFallback">
+                                    <span>OM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avatar-badge">
+                            <span class="badge-dot"></span> Backend Dev
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-hint">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- ─── ABOUT ─── -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">About Me</span>
+                    <h2>Who I Am<span class="dot">.</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card glass reveal">
+                        <div class="about-icon">🎓</div>
+                        <h3>Education</h3>
+                        <p>Computer Science student with a passion for backend engineering and system design. Focused on building robust, scalable architectures.</p>
+                    </div>
+                    <div class="about-card glass reveal" style="--reveal-delay:0.1s">
+                        <div class="about-icon">⚡</div>
+                        <h3>Expertise</h3>
+                        <p>Specialized in Node.js ecosystem — NestJS, Express, REST APIs, MongoDB, and real-time systems using Socket.io.</p>
+                    </div>
+                    <div class="about-card glass reveal" style="--reveal-delay:0.2s">
+                        <div class="about-icon">🔒</div>
+                        <h3>Security</h3>
+                        <p>Implementing secure authentication flows with JWT, OTP verification, bcrypt hashing, and clean role-based access control.</p>
+                    </div>
+                    <div class="about-card glass reveal" style="--reveal-delay:0.3s">
+                        <div class="about-icon">🚀</div>
+                        <h3>Production</h3>
+                        <p>Building and deploying production-ready systems including E-Commerce platforms and real-time chat applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── SKILLS ─── -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Tech Stack</span>
+                    <h2>Skills & Tools<span class="dot">.</span></h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-group glass reveal">
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon">⚙️</span> Backend
+                        </h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag primary">Node.js</span>
+                            <span class="skill-tag primary">NestJS</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-group glass reveal" style="--reveal-delay:0.1s">
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon">🗄️</span> Database
+                        </h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag primary">MongoDB</span>
+                            <span class="skill-tag">Mongoose</span>
+                            <span class="skill-tag">MySQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group glass reveal" style="--reveal-delay:0.2s">
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon">🔐</span> Auth & Security
+                        </h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag primary">JWT</span>
+                            <span class="skill-tag">OTP</span>
+                            <span class="skill-tag">Bcrypt</span>
+                            <span class="skill-tag">Passport.js</span>
+                            <span class="skill-tag">RBAC</span>
+                        </div>
+                    </div>
+                    <div class="skill-group glass reveal" style="--reveal-delay:0.3s">
+                        <h3 class="skill-group-title">
+                            <span class="skill-icon">🛠️</span> Tools & Infra
+                        </h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag primary">Docker</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Swagger</span>
+                            <span class="skill-tag">Socket.io</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" style="padding: 100px 0;">
+        <!-- ─── PROJECTS ─── -->
+        <section id="projects" class="section">
             <div class="container">
-                <h2 class="reveal" style="margin-bottom: 48px; font-size: 32px;">Selected Projects<span>.</span></h2>
-                <div class="grid">
-                    <div class="glass-card reveal">
-                        <h3 style="color: var(--accent-cyan);">Thalorix</h3>
-                        <p>Modular multi-service backend system built with NestJS and Clean Architecture.</p>
+                <div class="section-header reveal">
+                    <span class="section-tag">Portfolio</span>
+                    <h2>Selected Projects<span class="dot">.</span></h2>
+                </div>
+                <div class="projects-grid">
+
+                    <div class="project-card glass reveal featured">
+                        <div class="project-header">
+                            <div class="project-badges">
+                                <span class="badge badge-featured">Featured</span>
+                                <span class="badge">NestJS</span>
+                                <span class="badge">MongoDB</span>
+                            </div>
+                            <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="project-link" aria-label="GitHub">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                            </a>
+                        </div>
+                        <h3 class="project-title">Thalorix</h3>
+                        <p class="project-desc">Modular multi-service backend platform built with NestJS and Clean Architecture. Features OTP authentication, role-based access control, and a scalable seller/buyer marketplace system.</p>
+                        <div class="project-tech">
+                            <span>NestJS</span><span>TypeScript</span><span>MongoDB</span><span>JWT</span><span>Docker</span>
+                        </div>
                     </div>
-                    <div class="glass-card reveal" style="transition-delay: 0.1s;">
-                        <h3 style="color: var(--accent-cyan);">E-commerce Platform</h3>
-                        <p>Full-featured retail engine managing Auth, Products, and Orders.</p>
+
+                    <div class="project-card glass reveal" style="--reveal-delay:0.1s">
+                        <div class="project-header">
+                            <div class="project-badges">
+                                <span class="badge">Node.js</span>
+                                <span class="badge">MongoDB</span>
+                            </div>
+                            <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="project-link" aria-label="GitHub">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                            </a>
+                        </div>
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-desc">Full-featured retail backend managing Auth, Products, Orders, and Payments. Built with clean architecture and secure REST APIs ready for production deployment.</p>
+                        <div class="project-tech">
+                            <span>Node.js</span><span>Express</span><span>MongoDB</span><span>JWT</span>
+                        </div>
                     </div>
-                    <div class="glass-card reveal" style="transition-delay: 0.2s;">
-                        <h3 style="color: var(--accent-cyan);">Lime Chat</h3>
-                        <p>Real-time server leveraging Socket.io for high-performance messaging.</p>
+
+                    <div class="project-card glass reveal" style="--reveal-delay:0.2s">
+                        <div class="project-header">
+                            <div class="project-badges">
+                                <span class="badge">Real-time</span>
+                                <span class="badge">Socket.io</span>
+                            </div>
+                            <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="project-link" aria-label="GitHub">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                            </a>
+                        </div>
+                        <h3 class="project-title">Lime Chat</h3>
+                        <p class="project-desc">Real-time chat server powered by Socket.io for high-performance messaging. Supports rooms, private messaging, and live presence tracking.</p>
+                        <div class="project-tech">
+                            <span>Node.js</span><span>Socket.io</span><span>MongoDB</span>
+                        </div>
                     </div>
-                    <div class="glass-card reveal" style="transition-delay: 0.3s;">
-                        <h3 style="color: var(--accent-cyan);">Tax App</h3>
-                        <p>Cybersecurity training environment for penetration testing simulations.</p>
+
+                    <div class="project-card glass reveal" style="--reveal-delay:0.3s">
+                        <div class="project-header">
+                            <div class="project-badges">
+                                <span class="badge">Node.js</span>
+                            </div>
+                            <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="project-link" aria-label="GitHub">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                            </a>
+                        </div>
+                        <h3 class="project-title">Tax App</h3>
+                        <p class="project-desc">Backend system for tax management and calculation with clean service layers, validation, and report generation.</p>
+                        <div class="project-tech">
+                            <span>Node.js</span><span>Express</span><span>MongoDB</span>
+                        </div>
                     </div>
+
+                </div>
+                <div class="projects-cta reveal">
+                    <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="btn btn-ghost" id="githubBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        View All on GitHub
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="about" style="padding: 100px 0;">
+        <!-- ─── CONTACT ─── -->
+        <section id="contact" class="section">
             <div class="container">
-                <div class="glass-card reveal">
-                    <h2 style="margin-bottom: 24px;">Core Expertise<span>.</span></h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Specializing in NestJS, Node.js, TypeScript, Docker, and MongoDB. Current CS GPA: 2.98.</p>
-                    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
-                        <div>
-                            <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">Backend</h4>
-                            <p style="font-size: 14px;">NestJS, Node.js, Express</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">Infrastructure</h4>
-                            <p style="font-size: 14px;">Docker, Linux, Git</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">Security</h4>
-                            <p style="font-size: 14px;">JWT, OTP, Bcrypt</p>
-                        </div>
-                    </div>
+                <div class="section-header reveal">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2>Let's Connect<span class="dot">.</span></h2>
                 </div>
-            </div>
-        </section>
-
-        <section id="contact" style="padding: 100px 0;">
-            <div class="container">
-                <div class="glass-card reveal">
-                    <div class="contact-grid">
-                        <div>
-                            <h2 style="margin-bottom: 16px;">Let's Connect<span>.</span></h2>
-                            <p style="color: var(--text-secondary); margin-bottom: 30px;">Open for specialized backend roles and architecture consultations.</p>
-                            <p style="margin-bottom: 10px;">omar.shabour1@gmail.com</p>
-                            <div style="display: flex; gap: 20px;">
-                                <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">GitHub</a>
-                                <a href="#" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">LinkedIn</a>
+                <div class="contact-wrapper">
+                    <div class="contact-info reveal">
+                        <p class="contact-intro">Open for backend roles, freelance projects, and architecture consultations. Let's build something great together.</p>
+                        <div class="contact-links">
+                            <a href="mailto:omar.shabour1@gmail.com" class="contact-link" id="emailLink">
+                                <div class="contact-link-icon">✉️</div>
+                                <div>
+                                    <span class="contact-link-label">Email</span>
+                                    <span class="contact-link-value">omar.shabour1@gmail.com</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com/Omar-Maher-Ahmed" target="_blank" class="contact-link" id="githubContactLink">
+                                <div class="contact-link-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="contact-link-label">GitHub</span>
+                                    <span class="contact-link-value">Omar-Maher-Ahmed</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact-form glass reveal" id="contactForm" style="--reveal-delay:0.15s" action="https://formspree.io/f/omar.shabour1@gmail.com" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Name</label>
+                                <input type="text" id="contactName" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" name="email" placeholder="email@example.com" required>
                             </div>
                         </div>
-                        <form action="https://formspree.io/f/omar.shabour1@gmail.com" method="POST">
-                            <div class="input-group">
-                                <label>Name</label>
-                                <input type="text" name="name" class="glass-input" placeholder="Your Name" required>
-                            </div>
-                            <div class="input-group">
-                                <label>Email</label>
-                                <input type="email" name="email" class="glass-input" placeholder="email@example.com" required>
-                            </div>
-                            <div class="input-group">
-                                <label>Message</label>
-                                <textarea name="message" class="glass-input" rows="4" placeholder="How can I help you?" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Send Message</button>
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="sendMessageBtn">Send Message →</button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer style="padding: 60px 0; text-align: center; color: var(--text-secondary); font-size: 14px; border-top: 0.5px solid var(--glass-border);">
-        &copy; 2026 Omar Maher | Developed with Obsidian Glass Architecture
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="#hero" class="logo">
+                    <span class="logo-bracket">&lt;</span>Omar<span class="logo-dot">/</span><span class="logo-bracket">&gt;</span>
+                </a>
+                <p class="footer-text">© 2026 Omar Maher Ahmed · Backend Engineer</p>
+                <div class="footer-links">
+                    <a href="https://github.com/Omar-Maher-Ahmed" target="_blank">GitHub</a>
+                    <a href="mailto:omar.shabour1@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="main.js"></script>
